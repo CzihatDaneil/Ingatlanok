@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Ingatlanok;
+using System.ComponentModel.DataAnnotations;
 
 List<Ingatlan> Ingatlanok = new List<Ingatlan>();
 if (!File.Exists("ingatlanok.txt"))
@@ -28,28 +29,44 @@ else
         string azonosito = adatok[0];
         string cim = adatok[1];
         string kategoria = adatok[2];
-        if (adatok.Length == 4)
+        if (adatok.Length ==4)
         {
             if (int.TryParse(adatok[3], out int alapteruletM2))
             {
 
 
                 Ingatlanok.Add(new(azonosito, cim, kategoria, alapteruletM2));
+                
             }
             else
             {
-                Console.WriteLine($"[HIBA] A(z) {azonosito} azonosítójú ingatlan adatai hibásak, átugorva!");
+                Console.WriteLine($"[HIBA] A(z) {azonosito} azonosítójú ingatlan adatai hibásak, átugorva!\n");
             }
         }
         if (adatok.Length == 5)
         {
             int.TryParse(adatok[3], out int alapteruletM2);
-            int.TryParse(adatok[4], out int osszesRegisztraltIngatlan);
-            Ingatlanok.Add(new Ingatlan(azonosito, cim, kategoria, alapteruletM2, osszesRegisztraltIngatlan));
+            int.TryParse(adatok[4], out int arEzerFt);
+            Ingatlanok.Add(new Ingatlan(azonosito, cim, kategoria, alapteruletM2, arEzerFt));
         }
     }
+}
 foreach (var a in Ingatlanok)
 {
     Console.WriteLine(a.ToString());
 }
-Console.WriteLine($"Regisztrált ingatlanok száma a rendszerben: {Ingatlanok.Ossre} db");
+Console.WriteLine($"\nRegisztrált eszközök száma a rendszerben: {Ingatlan.OsszesRegisztraltIngatlan} db");
+Console.WriteLine("Lakás Kategóriájú Ingatlanok\n");
+int legn = 0;
+var nev = "";
+foreach (var b in Ingatlanok)
+{
+    if (b.AlapteruletM2 > legn)
+    {
+        legn = b.AlapteruletM2;
+        nev = b;
+
+    }
+
+}
+Console.WriteLine(nev);

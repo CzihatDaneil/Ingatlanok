@@ -18,9 +18,13 @@ namespace Ingatlanok
             get { return alapteruletM2; }
             set
             {
-                if (alapteruletM2 < 10)
+                if (alapteruletM2<10)
                 {
-                    alapteruletM2 = 10;
+                   alapteruletM2=10;
+                }
+                else 
+                {
+                    alapteruletM2=value; 
                 }
             }
         }
@@ -33,9 +37,13 @@ namespace Ingatlanok
                 {
                     arEzerFt = 0;
                 }
+                else
+                {
+                    arEzerFt = value;
+                }
             }
         }
-        static int OsszesRegisztraltIngatlan
+        public static int OsszesRegisztraltIngatlan
         {
             get { return osszesRegisztraltIngatlan; }
         }
